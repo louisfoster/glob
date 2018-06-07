@@ -12,6 +12,7 @@
 		BF1B3A3620C94A55006AF87A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3520C94A55006AF87A /* art.scnassets */; };
 		BF1B3A3820C94A56006AF87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3720C94A56006AF87A /* Assets.xcassets */; };
 		BF1B3A3B20C94A56006AF87A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3920C94A56006AF87A /* Main.storyboard */; };
+		BF1B3A4620C94B40006AF87A /* BasicGeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B3A4520C94B40006AF87A /* BasicGeo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		BF1B3A3A20C94A56006AF87A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF1B3A3C20C94A56006AF87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF1B3A3D20C94A56006AF87A /* glob.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = glob.entitlements; sourceTree = "<group>"; };
+		BF1B3A4520C94B40006AF87A /* BasicGeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicGeo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		BF1B3A3020C94A55006AF87A /* glob */ = {
 			isa = PBXGroup;
 			children = (
+				BF1B3A4320C94AEA006AF87A /* Components */,
 				BF1B3A3120C94A55006AF87A /* AppDelegate.swift */,
 				BF1B3A3320C94A55006AF87A /* GameViewController.swift */,
 				BF1B3A3520C94A55006AF87A /* art.scnassets */,
@@ -64,6 +67,14 @@
 				BF1B3A3D20C94A56006AF87A /* glob.entitlements */,
 			);
 			path = glob;
+			sourceTree = "<group>";
+		};
+		BF1B3A4320C94AEA006AF87A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BF1B3A4520C94B40006AF87A /* BasicGeo.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1B3A4620C94B40006AF87A /* BasicGeo.swift in Sources */,
 				BF1B3A3420C94A55006AF87A /* GameViewController.swift in Sources */,
 				BF1B3A3220C94A55006AF87A /* AppDelegate.swift in Sources */,
 			);

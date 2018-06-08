@@ -41,6 +41,11 @@ class GameViewController: NSViewController {
         // Loading of basic object
         let basic = BasicGeo()
         scene.rootNode.addChildNode(basic)
+        let act = SCNAction.customAction(duration: 1.0, action: { (node, i) in
+            basic.updateVerts()
+        })
+        let act0 = SCNAction.repeatForever(act)
+        scene.rootNode.runAction(act0)
         
         
         // retrieve the SCNView

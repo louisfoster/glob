@@ -1,0 +1,19 @@
+disabled_rules:
+- trailing_whitespace
+- line_length
+- syntactic_sugar
+- variable_name
+- statement_position
+- function_parameter_count
+- type_name
+- todo
+- nesting
+- file_length
+- type_body_length
+- large_tuple
+- fallthrough
+- cyclomatic_complexity
+- function_body_length
+
+excluded:
+- Pods

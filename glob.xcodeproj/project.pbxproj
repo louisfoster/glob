@@ -13,6 +13,8 @@
 		BF1B3A3820C94A56006AF87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3720C94A56006AF87A /* Assets.xcassets */; };
 		BF1B3A3B20C94A56006AF87A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3920C94A56006AF87A /* Main.storyboard */; };
 		BF1B3A4620C94B40006AF87A /* BasicGeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B3A4520C94B40006AF87A /* BasicGeo.swift */; };
+		BFAA4FD020CB7DC80063D642 /* CubeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA4FCF20CB7DC80063D642 /* CubeBuilder.swift */; };
+		BFAA4FD320CB8C6B0063D642 /* Loader3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA4FD220CB8C6B0063D642 /* Loader3D.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		BF1B3A3C20C94A56006AF87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF1B3A3D20C94A56006AF87A /* glob.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = glob.entitlements; sourceTree = "<group>"; };
 		BF1B3A4520C94B40006AF87A /* BasicGeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicGeo.swift; sourceTree = "<group>"; };
+		BFAA4FCF20CB7DC80063D642 /* CubeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeBuilder.swift; sourceTree = "<group>"; };
+		BFAA4FD220CB8C6B0063D642 /* Loader3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader3D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 		BF1B3A3020C94A55006AF87A /* glob */ = {
 			isa = PBXGroup;
 			children = (
+				BFAA4FD120CB8C540063D642 /* Output */,
 				BF1B3A4320C94AEA006AF87A /* Components */,
 				BF1B3A3120C94A55006AF87A /* AppDelegate.swift */,
 				BF1B3A3320C94A55006AF87A /* GameViewController.swift */,
@@ -73,8 +78,17 @@
 			isa = PBXGroup;
 			children = (
 				BF1B3A4520C94B40006AF87A /* BasicGeo.swift */,
+				BFAA4FCF20CB7DC80063D642 /* CubeBuilder.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		BFAA4FD120CB8C540063D642 /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				BFAA4FD220CB8C6B0063D642 /* Loader3D.swift */,
+			);
+			path = Output;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +163,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF1B3A4620C94B40006AF87A /* BasicGeo.swift in Sources */,
+				BFAA4FD320CB8C6B0063D642 /* Loader3D.swift in Sources */,
 				BF1B3A3420C94A55006AF87A /* GameViewController.swift in Sources */,
+				BFAA4FD020CB7DC80063D642 /* CubeBuilder.swift in Sources */,
 				BF1B3A3220C94A55006AF87A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

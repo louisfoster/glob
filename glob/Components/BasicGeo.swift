@@ -33,9 +33,8 @@ import Foundation
 import SceneKit
 
 protocol BasicGeoProtocol {
-    var vertValues: [CGFloat] { get }
     var verts: [SCNVector3]? { get }
-    var pointIndices: [UInt8] { get }
+    var indices: [UInt8]? { get }
     var model: SCNNode { get }
 }
 
@@ -43,23 +42,11 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     
     // MARK: Properties
     
-    // These are the points in space to use for building tris/quads
-    var vertValues: [CGFloat] = [
-        0.5, -0.5, 0,
-        -0.5, 0.5, 0,
-        -0.5, -0.5, 0,
-        0.5, 0.5, 0,
-    ]
+    var face = 0;
     
     private(set) var verts: [SCNVector3]?
     
-    // Order of tri indices relating to the verts to be drawn
-    // Each 3 = 1 tri
-    // Each 6 = 1 quad
-    var pointIndices: [UInt8] = [
-        0, 1, 2,
-        3, 1, 0
-    ]
+    private(set) var indices: [UInt8]?
     
     private(set) var model: SCNNode = SCNNode()
     
@@ -71,9 +58,23 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     
     override init() {
         super.init()
-        self.model.name = "model"
+        
         self.addChildNode(self.model)
+        self.verts = [SCNVector3]()
+        self.indices = [UInt8]()
+        
         self.setVerts(completion: self.setGeometry)
+        
+        let rad = 30 * (CGFloat.pi / 180)
+        
+        self.runAction(
+            SCNAction.repeatForever(
+                SCNAction.rotate(by: rad,
+                                 around: SCNVector3(1, 1, 1),
+                                 duration: 1
+                )
+            )
+        )
     }
     
     // MARK: Setup
@@ -82,56 +83,66 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     private func setVerts(completion: () -> ()) {
         // Values per vector
         let stride = 3;
-        let vertCount = self.vertValues.count / stride
-        // Reset our vert array
-        self.verts = [SCNVector3]()
-        
-        // For each set of values per vector, get the values, create a vector
-        // and add it to the array of vectors
-        for v in 0..<vertCount {
-            let offset = v * stride
-            let values = Array(self.vertValues[offset..<offset+stride])
-            self.verts?.append(SCNVector3(values[0], values[1], values[2]))
+        let vertArray = CubeBuilder.vertValues[self.face]
+        let count = vertArray.count
+        if count > 0 {
+            let vertCount = count / stride
+            
+            // For each set of values per vector, get the values, create a vector
+            // and add it to the array of vectors
+            for v in 0..<vertCount {
+                let offset = v * stride
+                let values = Array(vertArray[offset..<offset+stride])
+                self.verts?.append(SCNVector3(values[0], values[1], values[2]))
+            }
         }
+        
+        self.indices?.append(contentsOf: CubeBuilder.pointIndices[self.face])
+        
+        self.face += 1
         
         completion()
     }
     
     private func setGeometry() {
-        self.model.removeFromParentNode()
-        if let _verts = self.verts {
+        if let _verts = self.verts, let _indices = self.indices {
             
             // Loader for the verticies
-            let n: [SCNGeometrySource] = [
+            let sources: [SCNGeometrySource] = [
                 SCNGeometrySource(vertices: _verts),
-                ]
+            ]
             
             // Loader for the indices and setting the primitive (tris)
-            let m: [SCNGeometryElement] = [
-                SCNGeometryElement(indices: self.pointIndices, primitiveType: .triangles),
-                ]
+            let elements: [SCNGeometryElement] = [
+                SCNGeometryElement(indices: _indices, primitiveType: .triangles),
+            ]
             
             // Create the geo from the vert and ind loaders
-            let geo = SCNGeometry(sources: n, elements: m)
+            let geometry = SCNGeometry(sources: sources, elements: elements)
             
             // Add a basic material to the geo
             let material = SCNMaterial()
             material.diffuse.contents = NSColor.gray
-            geo.firstMaterial = material
+            geometry.firstMaterial = material
             
             // Set the node to include the geo for display in a scene
-            self.model.geometry = geo
+            self.model.geometry = geometry
             self.addChildNode(self.model)
+            
+            let loader3D = Loader3D(vectors: _verts, indices: _indices)
+            if let json0 = loader3D.toJSON() {
+                let l3d = Loader3D(json: json0)
+                let _ = l3d.toJSON()
+            }
         }
     }
     
     // MARK: Actions
+    
     public func updateVerts() {
-        let newValues = self.vertValues.map { (item) -> CGFloat in
-            let v = item == 0.0 ? 0.0 : (item + 0.01)
-            return copysign(v, item)
+        if self.face < CubeBuilder.pointIndices.count {
+        
+            self.setVerts(completion: self.setGeometry)
         }
-        self.vertValues = newValues
-        self.setVerts(completion: self.setGeometry)
     }
 }

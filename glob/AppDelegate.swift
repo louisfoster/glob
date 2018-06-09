@@ -15,4 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
     }
     
+    func applicationWillTerminate(_ notification: Notification) {
+        // Do something about our render view to prevent weird errors/crashes/etc
+    }
+    
 }

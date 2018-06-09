@@ -42,7 +42,7 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     
     // MARK: Properties
     
-    var face = 0;
+    var face = 0
     
     private(set) var verts: [SCNVector3]?
     
@@ -64,25 +64,15 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
         self.indices = [UInt8]()
         
         self.setVerts(completion: self.setGeometry)
-        
-        let rad = 30 * (CGFloat.pi / 180)
-        
-        self.runAction(
-            SCNAction.repeatForever(
-                SCNAction.rotate(by: rad,
-                                 around: SCNVector3(1, 1, 1),
-                                 duration: 1
-                )
-            )
-        )
     }
     
     // MARK: Setup
     
     // Create verts then call a function to set the geo
-    private func setVerts(completion: () -> ()) {
+    private func setVerts(completion: () -> Void) {
+        
         // Values per vector
-        let stride = 3;
+        let stride = 3
         let vertArray = CubeBuilder.vertValues[self.face]
         let count = vertArray.count
         if count > 0 {
@@ -105,16 +95,17 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     }
     
     private func setGeometry() {
+        
         if let _verts = self.verts, let _indices = self.indices {
             
             // Loader for the verticies
             let sources: [SCNGeometrySource] = [
-                SCNGeometrySource(vertices: _verts),
+                SCNGeometrySource(vertices: _verts)
             ]
             
             // Loader for the indices and setting the primitive (tris)
             let elements: [SCNGeometryElement] = [
-                SCNGeometryElement(indices: _indices, primitiveType: .triangles),
+                SCNGeometryElement(indices: _indices, primitiveType: .triangles)
             ]
             
             // Create the geo from the vert and ind loaders
@@ -128,21 +119,28 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
             // Set the node to include the geo for display in a scene
             self.model.geometry = geometry
             self.addChildNode(self.model)
-            
-            let loader3D = Loader3D(vectors: _verts, indices: _indices)
-            if let json0 = loader3D.toJSON() {
-                let l3d = Loader3D(json: json0)
-                let _ = l3d.toJSON()
-            }
         }
     }
     
     // MARK: Actions
     
     public func updateVerts() {
+        
         if self.face < CubeBuilder.pointIndices.count {
         
             self.setVerts(completion: self.setGeometry)
         }
+    }
+    
+    public func getJSON() -> Data? {
+        
+        if let _verts = self.verts, let _indices = self.indices {
+            let obj3d = Loader3DObject(vectors: _verts, indices: _indices)
+            if let json = Loader3D.toJSON(obj3d) {
+                return json
+            }
+        }
+        
+        return nil
     }
 }

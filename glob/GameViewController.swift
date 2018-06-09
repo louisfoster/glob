@@ -15,9 +15,6 @@ class GameViewController: NSViewController {
     @IBOutlet
     private var sceneView: SCNView?
     
-    @IBOutlet
-    private var addQuadButton: NSButton?
-    
     // MARK: Properties
     
     var basicGeo: BasicGeo?
@@ -71,18 +68,41 @@ class GameViewController: NSViewController {
             // configure the view
             _sceneView.backgroundColor = NSColor.black
         }
+        
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: #selector(GameViewController.onSaveAs(notification:)),
+                         name: .saveAsIntent,
+                         object: nil)
     }
-    
-    /*
-    override func viewDidDisappear() {
-        // maybe stop scene actions/rendering etc?
-    }
-     */
     
     // MARK: Actions
     
-    @IBAction func addQuadButtonPress(_ sender: NSButton) {
-        self.basicGeo?.updateVerts()
+    override func keyUp(with event: NSEvent) {
+        if event.keyCode == 3 {
+            self.basicGeo?.updateVerts()
+        }
     }
     
+    @objc
+    func onSaveAs(notification: Notification) {
+        
+        guard let json = self.basicGeo?.getJSON() else {
+            print("failed to generate json")
+            return
+        }
+        
+        let panel = NSSavePanel()
+        panel.nameFieldStringValue = "obj3d.json"
+        panel.begin { (result) in
+            
+            if result == NSApplication.ModalResponse.OK {
+                if let saveURL = panel.url {
+                    let manager = FileManager()
+                    _ = manager.createFile(atPath: saveURL.path, contents: json, attributes: nil)
+                }
+            }
+        }
+    }
 }

@@ -11,12 +11,26 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    // MARK: App Properties
+    
+    @IBOutlet
+    private var saveAsMenuItem: NSMenuItem?
+    
+    // MARK: App life cycle
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        
     }
     
     func applicationWillTerminate(_ notification: Notification) {
         // Do something about our render view to prevent weird errors/crashes/etc
     }
     
+    // MARK: Actions
+    
+    @IBAction
+    private func saveAsMenuItemPressed(_ sender: Any) {
+        
+        NotificationCenter.default.post(name: .saveAsIntent, object: nil)
+    }
 }

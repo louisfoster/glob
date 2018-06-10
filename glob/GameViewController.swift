@@ -80,8 +80,13 @@ class GameViewController: NSViewController {
     // MARK: Actions
     
     override func keyUp(with event: NSEvent) {
-        if event.keyCode == 3 {
+        switch event.keyCode {
+        case 3:
             self.basicGeo?.updateVerts()
+        case 5:
+            self.basicGeo?.addMorph()
+        default:
+            return
         }
     }
     

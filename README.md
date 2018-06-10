@@ -8,7 +8,8 @@
 
 - Expose all functionality via Javascript Core && Some Keymapping tool
 - Investigate feasibility of externally loaded HTML interface that can be connected to Javascript core
-- SCNMorpher, Animation/rig/bones
+- (need to calculate and export normals (incl. morphs), texture coords/indices)
+- Animation/rig/bones
 - Add textures/shaders
 - Tests and a documentation tool before things get out of hand...
     - Visual testing guidelines for when testing display of objects in the builder and the mobile viewer

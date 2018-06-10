@@ -35,6 +35,7 @@ import SceneKit
 protocol BasicGeoProtocol {
     var verts: [SCNVector3]? { get }
     var indices: [UInt8]? { get }
+    var morphs: [[SCNVector3]]? { get }
     var model: SCNNode { get }
 }
 
@@ -47,6 +48,8 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     private(set) var verts: [SCNVector3]?
     
     private(set) var indices: [UInt8]?
+    
+    private(set) var morphs: [[SCNVector3]]?
     
     private(set) var model: SCNNode = SCNNode()
     
@@ -62,6 +65,7 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
         self.addChildNode(self.model)
         self.verts = [SCNVector3]()
         self.indices = [UInt8]()
+        self.morphs = [[SCNVector3]]()
         
         self.setVerts(completion: self.setGeometry)
     }
@@ -124,6 +128,61 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     
     // MARK: Actions
     
+    private func animateMorph() {
+        
+        let animation0 = CABasicAnimation(keyPath: "morpher.weights[1]")
+        animation0.fromValue = 0.0
+        animation0.toValue = 1.0
+        animation0.autoreverses = true
+        animation0.repeatCount = .infinity
+        animation0.duration = 1
+        self.model.addAnimation(animation0, forKey: nil)
+    }
+    
+    public func addMorph() {
+    
+        if let _verts = self.verts, let _indices = self.indices {
+            
+            var morph0 = [SCNVector3]()
+            var morph1 = [SCNVector3]()
+            for vert in _verts {
+                
+                morph0.append(
+                    SCNVector3(vert.x * 2.0, vert.y * 2.0, vert.z * 2.0)
+                )
+                morph1.append(
+                    SCNVector3(vert.x * 10.0, vert.y * 10.0, vert.z * 10.0)
+                )
+            }
+            
+            self.morphs?.append(morph0)
+            self.morphs?.append(morph1)
+            
+            let sources0: [SCNGeometrySource] = [
+                SCNGeometrySource(vertices: morph0)
+            ]
+            let elements0: [SCNGeometryElement] = [
+                SCNGeometryElement(indices: _indices, primitiveType: .triangles)
+            ]
+            let geometry0 = SCNGeometry(sources: sources0, elements: elements0)
+            
+            let sources1: [SCNGeometrySource] = [
+                SCNGeometrySource(vertices: morph1)
+            ]
+            let elements1: [SCNGeometryElement] = [
+                SCNGeometryElement(indices: _indices, primitiveType: .triangles)
+            ]
+            let geometry1 = SCNGeometry(sources: sources1, elements: elements1)
+            
+            let morpher = SCNMorpher()
+            morpher.targets.append(geometry0)
+            morpher.targets.append(geometry1)
+            self.model.morpher = morpher
+            
+            self.animateMorph()
+        }
+    }
+    
     public func updateVerts() {
         
         if self.face < CubeBuilder.pointIndices.count {
@@ -134,9 +193,11 @@ class BasicGeo: SCNNode, BasicGeoProtocol {
     
     public func getJSON() -> Data? {
         
-        if let _verts = self.verts, let _indices = self.indices {
-            let obj3d = Loader3DObject(vectors: _verts, indices: _indices)
+        if let _verts = self.verts, let _indices = self.indices, let _morphs = self.morphs {
+            
+            let obj3d = Loader3DObject(vectors: _verts, indices: _indices, morphs: _morphs)
             if let json = Loader3D.toJSON(obj3d) {
+                
                 return json
             }
         }

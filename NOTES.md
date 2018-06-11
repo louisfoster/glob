@@ -1,5 +1,8 @@
 #  NOTES
 
+Thought: Could the creations in the editor eventually lead to being able to "auto-generate" an xcode scenekit project, along with incorporating gameplay kit etc? Perhaps that would be something for 2.0...
+
+____
 
 
 There is no way to alter the data once it is created and rendered.

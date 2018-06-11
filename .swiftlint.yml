@@ -14,6 +14,8 @@ disabled_rules:
 - fallthrough
 - cyclomatic_complexity
 - function_body_length
+- comma
+- trailing_comma
 
 excluded:
 - Pods

@@ -17,7 +17,8 @@ class GameViewController: NSViewController {
     
     // MARK: Properties
     
-    var basicGeo: BasicGeo?
+//    var basicGeo: BasicGeo?
+    var animGeo: AnimGeo?
     
     // MARK: View Life Cycle
     
@@ -50,10 +51,14 @@ class GameViewController: NSViewController {
         scene.rootNode.addChildNode(ambientLightNode)
         
         // Loading of basic object
-        self.basicGeo = BasicGeo()
-        if let _basicGeo = self.basicGeo {
-        
-            scene.rootNode.addChildNode(_basicGeo)
+//        self.basicGeo = BasicGeo()
+//        if let _basicGeo = self.basicGeo {
+//
+//            scene.rootNode.addChildNode(_basicGeo)
+//        }
+        self.animGeo = AnimGeo()
+        if let _animGeo = self.animGeo {
+            scene.rootNode.addChildNode(_animGeo)
         }
         
         // retrieve the SCNView
@@ -81,10 +86,10 @@ class GameViewController: NSViewController {
     
     override func keyUp(with event: NSEvent) {
         switch event.keyCode {
-        case 3:
-            self.basicGeo?.updateVerts()
-        case 5:
-            self.basicGeo?.addMorph()
+//        case 3:
+//            self.basicGeo?.updateVerts()
+//        case 5:
+//            self.basicGeo?.addMorph()
         default:
             return
         }
@@ -92,7 +97,7 @@ class GameViewController: NSViewController {
     
     @objc
     func onSaveAs(notification: Notification) {
-        
+        /*
         guard let json = self.basicGeo?.getJSON() else {
             print("failed to generate json")
             return
@@ -109,5 +114,6 @@ class GameViewController: NSViewController {
                 }
             }
         }
+         */
     }
 }

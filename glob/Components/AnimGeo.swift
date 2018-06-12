@@ -66,20 +66,86 @@ class AnimGeo: SCNNode {
             ]
             
             // Create the geo from the vert and ind loaders
-            let geometry = SCNGeometry(sources: sources, elements: elements)
+            let _geometry = SCNGeometry(sources: sources, elements: elements)
             
             // Add a basic material to the geo
             let material = SCNMaterial()
             material.diffuse.contents = NSColor.gray
-            geometry.firstMaterial = material
+            _geometry.firstMaterial = material
             
             // Set the node to include the geo for display in a scene
-            self.model.geometry = geometry
-            self.addChildNode(self.model)
+            self.model.geometry = _geometry
+            
+            self.setBones()
         }
     }
     
     func setBones() {
+        
+        var bones: [SCNNode] = [SCNNode]()
+        for boneName in IBones {
+            let node = SCNNode()
+            node.name = boneName
+            if bones.count > 0 {
+                bones[0].addChildNode(node)
+            }
+            bones.append(node)
+        }
+        bones[1].position = SCNVector3(0, 3, 0)
+        bones[2].position = SCNVector3(2, 0, 0)
+        
+        let stride = 3
+        var transformMatrices: [NSValue] = [NSValue]()
+        let identity = NSValue(scnMatrix4: SCNMatrix4Identity)
+        transformMatrices.append(identity)
+        let iBoneTranslateVectorCount = IBoneTranslateVector.count / stride
+        for n in 0..<iBoneTranslateVectorCount {
+            let baseIndex = n * stride
+            let matrix = SCNMatrix4MakeTranslation(
+                IBoneTranslateVector[baseIndex],
+                IBoneTranslateVector[baseIndex + 1],
+                IBoneTranslateVector[baseIndex + 2])
+            let value = NSValue(scnMatrix4: SCNMatrix4Invert(matrix))
+            transformMatrices.append(value)
+            // Origin point matrix4
+            // transform with translation vector
+            // invert
+            // append
+        }
+        
+        // needs to be Float (32 bit)
+        let weightBytes = MemoryLayout<Float>.size
+        let weightDataCount = IBoneWeights.count * weightBytes
+        let weightData = Data(bytes: UnsafeRawPointer(IBoneWeights), count: weightDataCount)
+        let weights = SCNGeometrySource(data: weightData,
+                                        semantic: .boneWeights,
+                                        vectorCount: IBoneWeights.count,
+                                        usesFloatComponents: true,
+                                        componentsPerVector: 1,
+                                        bytesPerComponent: weightBytes,
+                                        dataOffset: 0,
+                                        dataStride: weightBytes)
+        
+        // Perhaps these two arrays can be combined?
+        let indexBytes = MemoryLayout<UInt8>.size
+        let indexDataCount = IBoneIndices.count * indexBytes
+        let indexData = Data(bytes: UnsafeRawPointer(IBoneIndices), count: indexDataCount)
+        let indices = SCNGeometrySource(data: indexData,
+                                        semantic: .boneIndices,
+                                        vectorCount: IBoneIndices.count,
+                                        usesFloatComponents: false,
+                                        componentsPerVector: 1,
+                                        bytesPerComponent: indexBytes,
+                                        dataOffset: 0,
+                                        dataStride: indexBytes)
+        
+        self.model.skinner = SCNSkinner(baseGeometry: self.model.geometry,
+                                        bones: bones,
+                                        boneInverseBindTransforms: transformMatrices,
+                                        boneWeights: weights,
+                                        boneIndices: indices)
+        
+//        self.boneAnimation()
         
         // IBones need to become [SCNNode] (use the string as the name?)
         // IBoneTranslateVector needs to become [SCNMatrix4] (or something)
@@ -94,10 +160,31 @@ class AnimGeo: SCNNode {
         //  - set semantic to "boneIndices"
         //  - vector count = array count, floatComponents is false, components = 1, bytes=memory size of UInt8 type?, offset = 0, stride = 1
         
-        
         // ----- Test what the effect of parenting bone nodes does
         // ----- Check the value of baseGeometryBindTransform (SCNSkinner)
         // ----- What is returned from the "skeleton" prop (SCNSkinner)
+    }
+    
+    // Despite animation being enabled, animations don't work
+    // This function only seems to run when prompted
+    public func boneAnimation() {
+        
+        print("run anim")
+        
+        if let pos = self.model.skinner?.bones[1].position {
+            
+            self.model.skinner?.bones[1].position = SCNVector3(pos.x - 0.1, pos.y + 0.3, pos.z + 0.1)
+        }
+        
+        /*
+        let animation0 = CABasicAnimation(keyPath: "position.x")
+        animation0.fromValue = 0
+        animation0.toValue = 2.0
+        animation0.autoreverses = true
+        animation0.repeatCount = .infinity
+        animation0.duration = 1
+        self.model.skinner?.bones[1].addAnimation(animation0, forKey: nil)
+         */
     }
 }
 

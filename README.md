@@ -6,6 +6,8 @@
 
 ## TODO:
 
+- Animation not working on bones....
+
 - Data model versioning (when it gets to a useable point)
 - Expose all functionality via Javascript Core && Some Keymapping tool
 - Investigate feasibility of externally loaded HTML interface that can be connected to Javascript core

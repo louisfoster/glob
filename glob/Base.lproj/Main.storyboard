@@ -440,7 +440,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="527" height="384"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <sceneView loops="NO" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="RvT-eo-GD2">
+                            <sceneView playing="YES" preferredRenderingAPI="1" translatesAutoresizingMaskIntoConstraints="NO" id="RvT-eo-GD2">
                                 <rect key="frame" x="0.0" y="0.0" width="527" height="384"/>
                             </sceneView>
                         </subviews>

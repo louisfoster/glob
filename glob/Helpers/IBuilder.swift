@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 // Position verticies for the geometry mesh
 public let IVerticies: [CGFloat] = [
@@ -70,7 +71,6 @@ public let IBones: [String] = [
 // these will then need to be calculated...
 public let IBoneTranslateVector: [CGFloat] = [
 
-    0, 0, 0,
     0, 3, 0,
     2, 0, 0,
 
@@ -79,7 +79,8 @@ public let IBoneTranslateVector: [CGFloat] = [
 // Number of Vectors = mesh vertices (14)
 // Components per vector = max bones per mesh vertices (1)
 // Component value = influence of bone of mesh vertex (1.0)
-public let IBoneWeights: [CGFloat] = [
+
+public let IBoneWeights: [Float] = [
     
     1.0,
     1.0,

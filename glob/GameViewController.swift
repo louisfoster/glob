@@ -86,7 +86,8 @@ class GameViewController: NSViewController {
     
     override func keyUp(with event: NSEvent) {
         switch event.keyCode {
-//        case 3:
+        case 3:
+            self.animGeo?.boneAnimation()
 //            self.basicGeo?.updateVerts()
 //        case 5:
 //            self.basicGeo?.addMorph()

@@ -146,13 +146,6 @@ class AnimGeo: SCNNode {
                                         boneInverseBindTransforms: transformMatrices,
                                         boneWeights: weights,
                                         boneIndices: indices)
-//        self.model.skinner?.skeleton = bones[0]
-        
-//        print(self.model.skinner?.bones[0].isPaused)
-//        print(self.model.skinner?.bones[1].isPaused)
-//        print(self.model.skinner?.bones[2].isPaused)
-        
-//        self.boneAnimation()
         
         // IBones need to become [SCNNode] (use the string as the name?)
         // IBoneTranslateVector needs to become [SCNMatrix4] (or something)
@@ -176,62 +169,19 @@ class AnimGeo: SCNNode {
     // This function only seems to run when prompted
     public func boneAnimation() {
         
-//        let keyframeAnimation = CAKeyframeAnimation(keyPath: "position.y")
-//
-//        keyframeAnimation.values = [4, 7, 10]
-//        keyframeAnimation.keyTimes = [0, 0.5, 1]
-//        keyframeAnimation.duration = 5
-//
-//        self.model.skinner?.bones[1].addAnimation(keyframeAnimation, forKey: nil)
+        let constrain = SCNDistanceConstraint(target: self.model.skinner?.bones[2])
+        constrain.maximumDistance = 7.0
+        self.model.skinner?.bones[1].constraints?.append(constrain)
         
-//        let player = SCNAnimationPlayer(animation: SCNAnimation(caAnimation: keyframeAnimation))
-//
-//        self.model.skinner?.bones[1].addAnimationPlayer(player, forKey: "test")
-//        player.play()
-        
-        
-//        self.model.skinner?.bones[1].physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
-        
-//        SCNTransaction.begin()
-//        SCNTransaction.setAnimationDuration(10.0)
-//        SCNTransaction.animationDuration = 10.0
-//        SCNTransaction.setCompletionBlock() { }
-//        SCNTransaction.completionBlock
-//        self.model.skinner?.bones[1].position.y = 10
-//        SCNTransaction.commit()
-        
-//        if let skel = self.model.skinner?.skeleton {
-//            print("run anim")
-//            skel.position = SCNVector3(5, 3, 1)
-//            print(skel)
-//        }
-//
-//        if let skin = self.model.skinner {
-//            print("got skin")
-//            print(skin)
-//        }
-        
-        
-        
-        /*
-        if let pos = self.model.skinner?.bones[1].position {
-
-            self.model.skinner?.bones[1].position = SCNVector3(pos.x - 0.1, pos.y + 0.3, pos.z + 0.1)
-        }
-         */
-        /*
-        self.animation0 = CABasicAnimation(keyPath: "position.x")
-        self.animation0?.fromValue = 1.0
-        self.animation0?.toValue = 10.0
-        self.animation0?.autoreverses = true
-        self.animation0?.repeatCount = .infinity
-        self.animation0?.duration = 1
-        if let _anim = self.animation0 {
-        
-//            self.model.skinner?.bones[1].addAnimation(_anim, forKey: "test")
-            self.addAnimation(_anim, forKey: "test")
-        }
- */
+        guard let startY = self.model.skinner?.bones[1].position.y else { return }
+        let duration: CGFloat = 10.0
+        let goal = 20.0 - startY
+        let act = SCNAction.customAction(duration: TimeInterval(duration), action: { (node, elapsed) in
+            
+            let distance = goal / duration * elapsed
+            node.skinner?.bones[1].position.y = startY + distance
+        })
+        self.model.runAction(act)
     }
 }
 

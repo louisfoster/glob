@@ -9,8 +9,11 @@
 - Animation not working on bones....
     - scnskinner not creating skeleton root node...
     - need to check base mesh transform for skinner
-    - animations not being applied to skinner-based renders! whole parent node will move but skinner bones do not! animations can be applied all the way down until bones, which do not get animated in the usual manner.
-    - perhaps there is a requirement for more manual control over animations: CoreAnimation's CAKeyframeAnimation/CAAnimationGroup APIs.
+    - animations only work through custom action for some reason...
+        - issues might be resolved by running in parallel (group) or sequentially (sequence)
+        - testing whether phyics works on objects or inverse kinematics
+        - there's also speed, timing mode, timing function etc.
+        - constraints don't seem to have an effect
 
 - Data model versioning (when it gets to a useable point)
 - Expose all functionality via Javascript Core && Some Keymapping tool

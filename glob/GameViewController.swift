@@ -12,13 +12,16 @@ class GameViewController: NSViewController {
     
     // MARK: UI Properties
     
+    private var scene: SCNScene?
+    
     @IBOutlet
     private var sceneView: SCNView?
     
     // MARK: Properties
     
-//    var basicGeo: BasicGeo?
+    var basicGeo: BasicGeo?
     var animGeo: AnimGeo?
+    var baseModel: SCNNode = SCNNode()
     
     // MARK: View Life Cycle
     
@@ -26,7 +29,11 @@ class GameViewController: NSViewController {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene()
+        self.scene = SCNScene()
+        
+        guard let scene = self.scene else { fatalError("oh boy") }
+        
+        scene.rootNode.addChildNode(self.baseModel)
         
         // create and add a camera to the scene
         let cameraNode = SCNNode()
@@ -51,14 +58,16 @@ class GameViewController: NSViewController {
         scene.rootNode.addChildNode(ambientLightNode)
         
         // Loading of basic object
+        
 //        self.basicGeo = BasicGeo()
 //        if let _basicGeo = self.basicGeo {
-//
-//            scene.rootNode.addChildNode(_basicGeo)
+//            
+//            //            _basicGeo.addMorph()
 //        }
+ 
         self.animGeo = AnimGeo()
         if let _animGeo = self.animGeo {
-            scene.rootNode.addChildNode(_animGeo)
+            self.baseModel.addChildNode(_animGeo)
         }
         
         // retrieve the SCNView

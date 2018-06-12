@@ -10,7 +10,6 @@
 		BF135CDF20CE3EC2003900BD /* IBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF135CDE20CE3EC2003900BD /* IBuilder.swift */; };
 		BF1B3A3220C94A55006AF87A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B3A3120C94A55006AF87A /* AppDelegate.swift */; };
 		BF1B3A3420C94A55006AF87A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B3A3320C94A55006AF87A /* GameViewController.swift */; };
-		BF1B3A3620C94A55006AF87A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3520C94A55006AF87A /* art.scnassets */; };
 		BF1B3A3820C94A56006AF87A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3720C94A56006AF87A /* Assets.xcassets */; };
 		BF1B3A3B20C94A56006AF87A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1B3A3920C94A56006AF87A /* Main.storyboard */; };
 		BF1B3A4620C94B40006AF87A /* BasicGeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1B3A4520C94B40006AF87A /* BasicGeo.swift */; };
@@ -29,7 +28,6 @@
 		BF1B3A2E20C94A55006AF87A /* glob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1B3A3120C94A55006AF87A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF1B3A3320C94A55006AF87A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		BF1B3A3520C94A55006AF87A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		BF1B3A3720C94A56006AF87A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF1B3A3A20C94A56006AF87A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF1B3A3C20C94A56006AF87A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				BF1B3A4320C94AEA006AF87A /* Components */,
 				BF1B3A3320C94A55006AF87A /* GameViewController.swift */,
 				BF1B3A3120C94A55006AF87A /* AppDelegate.swift */,
-				BF1B3A3520C94A55006AF87A /* art.scnassets */,
 				BF1B3A3720C94A56006AF87A /* Assets.xcassets */,
 				BF1B3A3920C94A56006AF87A /* Main.storyboard */,
 				BF1B3A3C20C94A56006AF87A /* Info.plist */,
@@ -138,7 +135,7 @@
 				BFAA500820CBA5120063D642 /* Loader3D.swift */,
 			);
 			name = Output;
-			path = /Users/louis/code/glob/glob/Output;
+			path = /Users/louisfoster/code/glob/glob/Output;
 			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
@@ -153,8 +150,6 @@
 				BF1B3A2A20C94A55006AF87A /* Sources */,
 				BF1B3A2B20C94A55006AF87A /* Frameworks */,
 				BF1B3A2C20C94A55006AF87A /* Resources */,
-				660B48BEB0D4F519C8DE8675 /* [CP] Embed Pods Frameworks */,
-				7ECC02DAA4A6A9BDF807D75D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,43 +205,12 @@
 			files = (
 				BF1B3A3B20C94A56006AF87A /* Main.storyboard in Resources */,
 				BF1B3A3820C94A56006AF87A /* Assets.xcassets in Resources */,
-				BF1B3A3620C94A55006AF87A /* art.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		660B48BEB0D4F519C8DE8675 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glob/Pods-glob-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7ECC02DAA4A6A9BDF807D75D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glob/Pods-glob-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BFAA500320CBA2650063D642 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

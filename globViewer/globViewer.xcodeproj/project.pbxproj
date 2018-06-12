@@ -15,7 +15,6 @@
 		BFAA4FF720CB9DD80063D642 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA4FF520CB9DD80063D642 /* MainViewController.swift */; };
 		BFAA4FF820CB9DD80063D642 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFAA4FF620CB9DD80063D642 /* MainViewController.xib */; };
 		BFAA4FFD20CB9FAF0063D642 /* ObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA4FFC20CB9FAF0063D642 /* ObjectBuilder.swift */; };
-		BFAA500120CBA0FF0063D642 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = BFAA500020CBA0FF0063D642 /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +27,7 @@
 		BFAA4FF520CB9DD80063D642 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BFAA4FF620CB9DD80063D642 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		BFAA4FFC20CB9FAF0063D642 /* ObjectBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectBuilder.swift; sourceTree = "<group>"; };
-		BFAA500020CBA0FF0063D642 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		BFAA500520CBA4A20063D642 /* Loader3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Loader3D.swift; path = ../../../glob/Output/Loader3D.swift; sourceTree = "<group>"; };
+		BFAA500520CBA4A20063D642 /* Loader3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Loader3D.swift; path = ../glob/Output/Loader3D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +66,6 @@
 				BFAA4FE020CB9D460063D642 /* AppDelegate.swift */,
 				BFAA4FE920CB9D470063D642 /* LaunchScreen.storyboard */,
 				BFAA4FEC20CB9D470063D642 /* Info.plist */,
-				BFAA500020CBA0FF0063D642 /* art.scnassets */,
 				BFAA4FE720CB9D470063D642 /* Assets.xcassets */,
 				BF9BB80220CBDA4F009B93FB /* Supporting Files */,
 			);
@@ -159,7 +156,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFAA4FEB20CB9D470063D642 /* LaunchScreen.storyboard in Resources */,
-				BFAA500120CBA0FF0063D642 /* art.scnassets in Resources */,
 				BFAA4FF820CB9DD80063D642 /* MainViewController.xib in Resources */,
 				BF9BB80420CBDDBC009B93FB /* Supporting Files in Resources */,
 				BFAA4FE820CB9D470063D642 /* Assets.xcassets in Resources */,

@@ -88,11 +88,10 @@ class AnimGeo: SCNNode {
         for boneName in IBones {
             let node = SCNNode()
             node.name = boneName
-            if bones.count > 0 {
-                bones[0].addChildNode(node)
-            }
             bones.append(node)
         }
+        bones[0].addChildNode(bones[1])
+        bones[0].addChildNode(bones[2])
         bones[1].position = SCNVector3(0, 3, 0)
         bones[2].position = SCNVector3(2, 0, 0)
         
@@ -169,9 +168,9 @@ class AnimGeo: SCNNode {
     // This function only seems to run when prompted
     public func boneAnimation() {
         
-        let constrain = SCNDistanceConstraint(target: self.model.skinner?.bones[2])
-        constrain.maximumDistance = 7.0
-        self.model.skinner?.bones[1].constraints?.append(constrain)
+//        let constrain = SCNDistanceConstraint(target: self.model.skinner?.bones[2])
+//        constrain.maximumDistance = 7.0
+//        self.model.skinner?.bones[1].constraints?.append(constrain)
         
         guard let startY = self.model.skinner?.bones[1].position.y else { return }
         let duration: CGFloat = 10.0
@@ -179,7 +178,7 @@ class AnimGeo: SCNNode {
         let act = SCNAction.customAction(duration: TimeInterval(duration), action: { (node, elapsed) in
             
             let distance = goal / duration * elapsed
-            node.skinner?.bones[1].position.y = startY + distance
+            node.skinner?.bones[0].position.y = startY + distance
         })
         self.model.runAction(act)
     }

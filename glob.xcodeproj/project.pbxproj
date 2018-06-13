@@ -135,7 +135,7 @@
 				BFAA500820CBA5120063D642 /* Loader3D.swift */,
 			);
 			name = Output;
-			path = /Users/louisfoster/code/glob/glob/Output;
+			path = /Users/louis/code/glob/glob/Output;
 			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
@@ -150,6 +150,8 @@
 				BF1B3A2A20C94A55006AF87A /* Sources */,
 				BF1B3A2B20C94A55006AF87A /* Frameworks */,
 				BF1B3A2C20C94A55006AF87A /* Resources */,
+				F1ED55C419B551D2811C4EBD /* [CP] Embed Pods Frameworks */,
+				DBDCA731E40CA7417EBA2442 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +243,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBDCA731E40CA7417EBA2442 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glob/Pods-glob-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1ED55C419B551D2811C4EBD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glob/Pods-glob-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
